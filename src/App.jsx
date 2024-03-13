@@ -1,50 +1,31 @@
-import styled from "styled-components";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import PageNotFound from "./pages/PageNotFound";
+import Login from "./pages/Login";
+import Account from "./pages/Account";
+import Settings from "./pages/Settings";
+import Users from "./pages/Users";
+import Bookings from "./pages/Bookings";
 import GlobalStyles from "./styles/GlobalStyles";
-import Button from "./ui/Button";
-import Input from "./ui/Input";
-import Heading from "./ui/Heading";
-import Row from "./ui/Row";
-
-// const H1 = styled.h1`
-//   font-size: 30px;
-//   font-weight: 600;
-//   background-color: yellow;
-// `;
-
-const StyledApp = styled.div`
-  /* background-color: orangered; */
-  padding: 20px;
-`;
-
+import AppLayout from "./pages/AppLayout";
 function App() {
   return (
     <>
       <GlobalStyles />
-      <StyledApp>
-        <Row type="vertical">
-          <Row type="horizontal">
-            <Heading as="h1">The Wild Oasis</Heading>
-            <div>
-              <Heading as="h2">Check in and out</Heading>
-              <Button onClick={() => alert("check in")}>Check In</Button>
-              <Button
-                variation="secondary"
-                size="small"
-                onClick={() => alert("check in")}
-              >
-                Check out
-              </Button>
-            </div>
-          </Row>
-          <Row type="vertical">
-            <Heading as="h3">Form</Heading>
-            <form>
-              <Input type="text" placeholder="Number of guests" />
-              <Input type="text" placeholder="Number of guests" />
-            </form>
-          </Row>
-        </Row>
-      </StyledApp>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate replace to="dashboard" />}></Route>
+            <Route path="dashboard" element={<Dashboard />}></Route>
+            <Route path="bookings" element={<Bookings />}></Route>
+            <Route path="users" element={<Users />}></Route>
+            <Route path="settings" element={<Settings />}></Route>
+            <Route path="account" element={<Account />}></Route>
+          </Route>
+          <Route path="login" element={<Login />}></Route>
+          <Route path="*" element={<PageNotFound />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
