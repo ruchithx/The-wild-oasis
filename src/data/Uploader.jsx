@@ -104,6 +104,7 @@ function Uploader() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function uploadAll() {
+    console.log("click");
     setIsLoading(true);
     // Bookings need to be deleted FIRST
     await deleteBookings();
