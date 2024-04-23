@@ -36,22 +36,24 @@ const FilterButton = styled.button`
   }
 `;
 
-function Filter({ filterValue, option }) {
+function Filter({ filterValue, options }) {
+  console.log(options);
   const [searchParms, setSearchParms] = useSearchParams();
-  const currentFilter = searchParms.get(filterValue) || option.at(0).value;
+  const currentFilter = searchParms.get(filterValue) || options.at(0).value;
 
   function handleClick(value) {
+    console.log(filterValue, value);
     searchParms.set(filterValue, value);
     setSearchParms(searchParms);
   }
   return (
     <StyledFilter>
-      {option.map((item) => (
+      {options.map((item) => (
         <FilterButton
           key={item.label}
           active={currentFilter === item.value}
           onClick={() => handleClick(item.value)}
-          disabled={option.value}
+          disabled={options.value}
         >
           {item.label}
         </FilterButton>

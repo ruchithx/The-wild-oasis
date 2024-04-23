@@ -7,7 +7,7 @@ function CreateTableOperation() {
     <TableOperation>
       <Filter
         filterValue="discount"
-        option={[
+        options={[
           { value: "all", label: "All" },
           { value: "no-discount", label: "No discount" },
           { value: "with-discount", label: "With discount" },
