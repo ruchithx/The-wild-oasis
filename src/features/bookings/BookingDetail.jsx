@@ -9,11 +9,14 @@ import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
-// import { useParams } from "react-router-dom";
 // import { useQuery } from "@tanstack/react-query";
 // import { getBooking } from "../../services/apiBookings";
 import Spinner from "../../ui/Spinner";
 import { useBooking } from "./useBooking";
+
+import { useParams } from "react-router-dom";
+// import { useQuery } from "@tanstack/react-query";
+// import { getBooking } from "../../services/apiBookings";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -24,7 +27,22 @@ const HeadingGroup = styled.div`
 function BookingDetail() {
   const { booking, isLoading, error } = useBooking();
 
-  const { status, id: bookingId } = booking;
+  console.log(booking, isLoading, error);
+
+  const { bookingId } = useParams();
+
+  // const {
+  //   data: booking,
+  //   isLoading,
+  //   error,
+  // } = useQuery({
+  //   queryKey: ["booking", bookingId],
+  //   queryFn: () => getBooking(bookingId),
+  //   // retry: false,
+  // });
+  // console.log(booking, isLoading, error);
+
+  // const { id: bookingId } = booking;
 
   const moveBack = useMoveBack();
 
@@ -49,7 +67,9 @@ function BookingDetail() {
       <Row type="horizontal">
         <HeadingGroup>
           <Heading as="h1">Booking #{bookingId}</Heading>
-          <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+          <Tag type={statusToTagName[booking.status]}>
+            {booking.status.replace("-", " ")}
+          </Tag>
         </HeadingGroup>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>

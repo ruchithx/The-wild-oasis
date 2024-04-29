@@ -4,15 +4,17 @@ import { getBooking } from "../../services/apiBookings";
 
 export const useBooking = () => {
   const { bookingId } = useParams();
+  console.log(bookingId, "bookingId");
   const {
     data: booking,
     isLoading,
     error,
   } = useQuery({
-    gueryKey: ["booking", bookingId],
+    queryKey: ["booking", bookingId],
     queryFn: () => getBooking(bookingId),
-    retry: false,
+    // retry: false,
   });
+  console.log(booking, isLoading, error);
 
   return { booking, isLoading, error };
 };
