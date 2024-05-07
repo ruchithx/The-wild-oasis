@@ -14,6 +14,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import AppLayout from "./pages/AppLayout";
 import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
+import Checkin from "./pages/Checkin";
 
 function App() {
   const queryClient = new QueryClient({
@@ -35,6 +36,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />}></Route>
             <Route path="bookings" element={<Bookings />}></Route>
             <Route path="bookings/:bookingId" element={<Booking />}></Route>
+            <Route path="checkin/:bookingId" element={<Checkin />}></Route>
             <Route path="users" element={<Users />}></Route>
             <Route path="cabins" element={<Cabins />}></Route>
             <Route path="settings" element={<Settings />}></Route>

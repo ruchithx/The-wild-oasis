@@ -14,7 +14,8 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 import Spinner from "../../ui/Spinner";
 import { useBooking } from "./useBooking";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+// import Menus from "../../ui/Menus";
 // import { useQuery } from "@tanstack/react-query";
 // import { getBooking } from "../../services/apiBookings";
 
@@ -25,6 +26,7 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail() {
+  const navigate = useNavigate();
   const { booking, isLoading, error } = useBooking();
 
   console.log(booking, isLoading, error);
@@ -77,6 +79,12 @@ function BookingDetail() {
       <BookingDataBox booking={booking} />
 
       <ButtonGroup>
+        {booking.status === "unconfirmed" && (
+          <Button onClick={() => navigate(`/checkin/${bookingId}`)}>
+            Check in
+          </Button>
+        )}
+
         <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>
