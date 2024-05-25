@@ -20,6 +20,8 @@ import { useCheckOut } from "../check-in-out/useCheckOut";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useDeleteBooking from "./useDeleteBooking";
+import Empty from "../../ui/Empty";
+import Menus from "../../ui/Menus";
 // import Menus from "../../ui/Menus";
 // import { useQuery } from "@tanstack/react-query";
 // import { getBooking } from "../../services/apiBookings";
@@ -38,7 +40,7 @@ function BookingDetail() {
   console.log(booking, isLoading, error);
 
   const { bookingId } = useParams();
-
+  const { checkOut, isCheckingOut } = useCheckOut();
   // const {
   //   data: booking,
   //   isLoading,
@@ -61,7 +63,7 @@ function BookingDetail() {
       </div>
     );
   }
-
+  if (!booking) return <Empty resourceName="booking" />;
   if (error) return <div>Something went wrong</div>;
 
   const statusToTagName = {
@@ -69,7 +71,7 @@ function BookingDetail() {
     "checked-in": "green",
     "checked-out": "silver",
   };
-  const { checkOut, isCheckingOut } = useCheckOut();
+
   return (
     <>
       <Row type="horizontal">
@@ -108,6 +110,7 @@ function BookingDetail() {
             <ConfirmDelete
               resourceName="booking"
               onConfirm={() => deleteBooking(bookingId)}
+              disabled={isDeleting}
             />
           </Modal.Window>
         </Modal>
